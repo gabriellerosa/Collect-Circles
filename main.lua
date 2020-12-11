@@ -12,6 +12,13 @@ function love.load()
   gameState = 1 -- Qnd é 1 está no menu, caso contrario, está em game
 
   myFont = love.graphics.newFont(40)
+
+  sprites = {}
+  sprites.sky = love.graphics.newImage('sprites/sky.png')
+  sprites.target = love.graphics.newImage('sprites/target.png')
+  sprites.crosshairs = love.graphics.newImage('sprites/crosshairs.png')
+
+  love.mouse.setVisible(false)
 end
 
 -- Funcao que será responsável por atualizar 60 vzs a cd segundo o jogo
@@ -32,6 +39,7 @@ end
 
 -- Funcao responsável por img/desenhos do jogo
 function love.draw()
+  love.graphics.draw(sprites.sky, 0, 0)
 
   if gameState == 2 then
     love.graphics.setColor(0, 0, 1)
@@ -46,6 +54,9 @@ function love.draw()
   if gameState == 1 then
     love.graphics.printf("Clique na tela para começar :D", 0, love.graphics.getHeight()/2, love.graphics.getWidth(), "center")
   end
+
+  love.graphics.draw(sprites.target, button.x - 50, button.y - 50)
+  love.graphics.draw(sprites.crosshairs, love.mouse.getX()-20, love.mouse.getY()-20)
 end
 
 function love.mousepressed(x, y, btn, isTouch)
